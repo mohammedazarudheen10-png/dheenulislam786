@@ -3,15 +3,13 @@ services:
     name: dheenulislam786
     runtime: node
     plan: free
-    buildCommand: npm install --prefix frontend && npm run build
+    buildCommand: npm install --prefix backend && npm install --prefix frontend && npm run build
     startCommand: node backend/src/server.js
     envVars:
       - key: NODE_VERSION
         value: 20
       - key: DATABASE_URL
-        fromDatabase:
-          name: dheenulislam786-db
-          property: connectionString
+        sync: false
       - key: ADMIN_USERNAME
         sync: false
       - key: ADMIN_PASSWORD
@@ -20,7 +18,3 @@ services:
         generateValue: true
       - key: NODE_ENV
         value: production
-
-databases:
-  - name: dheenulislam786-db
-    plan: free
